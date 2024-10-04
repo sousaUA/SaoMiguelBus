@@ -3,12 +3,14 @@ package com.hsousa_apps.Autocarros.fragments
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.hsousa_apps.Autocarros.R
@@ -25,6 +27,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         return inflater.inflate(R.layout.settings, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Functions().checkForCustomAd(view, requireActivity())
@@ -48,6 +51,18 @@ class SettingsFragment : Fragment(), View.OnClickListener {
 
             val url = "https://linktr.ee/sousadev_"
             openWebPage(url)
+        }
+
+        faqs.setOnClickListener {
+            val builder = context?.let { AlertDialog.Builder(it) }
+            builder?.setTitle(getString(R.string.faq_label))
+            builder?.setMessage(
+                getString(R.string.faq1_question) + "\n\t\t" + getString(R.string.faq1_answer)
+                        + "\n\n" + getString(R.string.faq2_question) + "\n\t\t" + getString(R.string.faq2_answer)
+            )
+            builder?.setPositiveButton(android.R.string.yes) { dialog, which ->
+            }
+            builder?.show()
         }
 
         busContacts.setOnClickListener {
@@ -115,6 +130,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     /**
      * Show the Contacts Dialog
      */
+    @RequiresApi(Build.VERSION_CODES.N)
     private fun showContactsDialog() {
         val builder = context?.let { AlertDialog.Builder(it) }
         builder?.setTitle(getString(R.string.company_contacts_label))
