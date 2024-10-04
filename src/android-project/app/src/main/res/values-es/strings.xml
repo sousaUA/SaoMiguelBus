@@ -76,4 +76,5 @@
     <string name="toast_send_message">Enviar mensaje a</string>
     <string name="toast_email_message">Enviar el email a</string>
     <string name="back_to_main_app">Volver a la versión anterior de la aplicación</string>
+    <string name="open_web_view">Abrir nueva versión</string>
 </resources>

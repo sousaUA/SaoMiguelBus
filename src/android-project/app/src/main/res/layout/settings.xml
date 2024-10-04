@@ -381,4 +381,21 @@
         app:layout_constraintTop_toTopOf="@+id/settings_info_6"
         app:srcCompat="@drawable/baseline_arrow_back_ios_24" />
 
+    <!-- Open WebView Button -->
+    <Button
+        android:id="@+id/btnOpenWebView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_background"
+        android:elevation="4dp"
+        android:padding="10dp"
+        android:text="@string/open_web_view"
+        android:textColor="@android:color/white"
+        android:visibility="visible"
+        app:backgroundTint="#2BAC27"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/report_mail" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

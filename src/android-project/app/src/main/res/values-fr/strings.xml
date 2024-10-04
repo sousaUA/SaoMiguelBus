@@ -76,4 +76,5 @@
     <string name="toast_send_message">Envoyer un message à</string>
     <string name="toast_email_message">Envoyer un e-mail à</string>
     <string name="back_to_main_app">Retour à l\'ancienne version de l\'application</string>
+    <string name="open_web_view">Ouvrir une nouvelle version</string>
 </resources>
