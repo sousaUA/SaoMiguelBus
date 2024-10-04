@@ -16,6 +16,11 @@
         android:theme="@style/Theme.SMiguelBus">
 
         <activity
+            android:name=".WebViewActivity"
+            android:theme="@style/Theme.SMiguelBus.NoActionBar">
+        </activity>
+
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"

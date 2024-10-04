@@ -79,4 +79,5 @@
     <string name="contact_dev">Contact the Developer</string>
     <string name="no_location_permission">The app has no permission to access your location.</string>
     <string name="double_tap_maps">Double click to open a full map view</string>
+    <string name="back_to_main_app">Back to old app version</string>
 </resources>

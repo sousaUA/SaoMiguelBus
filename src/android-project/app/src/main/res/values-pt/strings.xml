@@ -75,4 +75,5 @@
     <string name="toast_calling_message">Ligar para</string>
     <string name="toast_send_message">Enviar mensagem para</string>
     <string name="toast_email_message">Enviar email para</string>
+    <string name="back_to_main_app">Voltar à versão antiga da app</string>
 </resources>

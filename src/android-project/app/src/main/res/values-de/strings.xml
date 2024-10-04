@@ -75,4 +75,5 @@
     <string name="toast_calling_message">Ruf an</string>
     <string name="toast_send_message">Nachricht senden an</string>
     <string name="toast_email_message">Schicke eine Email an</string>
+    <string name="back_to_main_app">Zurück zur alten App-Version</string>
 </resources>

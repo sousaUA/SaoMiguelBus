@@ -152,7 +152,7 @@ class Functions {
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun isOnline(context: Context): Boolean {
+    fun isOnline(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         if (connectivityManager != null) {
