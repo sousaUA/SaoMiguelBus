@@ -17,7 +17,8 @@
 
         <activity
             android:name=".WebViewActivity"
-            android:theme="@style/Theme.SMiguelBus.NoActionBar">
+            android:theme="@style/Theme.SMiguelBus.NoActionBar"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
