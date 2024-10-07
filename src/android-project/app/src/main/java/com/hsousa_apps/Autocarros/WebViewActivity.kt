@@ -1,15 +1,18 @@
 package com.hsousa_apps.Autocarros
 
 import android.annotation.SuppressLint
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.webkit.CookieManager
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
+import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Button
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 
@@ -26,28 +29,64 @@ class WebViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web_view)
 
+        // Initialize views
         webView = findViewById(R.id.webView)
         btnBackToApp = findViewById(R.id.btnBackToApp)
         btnClose = findViewById(R.id.btnClose)
         linearLayout = findViewById(R.id.buttonLayout) // Assuming you have an ID for the LinearLayout
 
-        webView.webViewClient = WebViewClient() // Ensures links are opened within the WebView
-        webView.settings.javaScriptEnabled = true // Enable JavaScript if needed
-        CookieManager.getInstance().setAcceptCookie(true) // Allow the use of cookies
-        CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true)
+        setupWebView()
+
+        // Set up button click listeners
+        btnBackToApp.setOnClickListener { navigateToMainActivity() }
+        btnClose.setOnClickListener { closeLinearLayout() }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun setupWebView() {
+        webView.webViewClient = object : WebViewClient() {
+            override fun onReceivedError(
+                view: WebView?,
+                request: WebResourceRequest?,
+                error: WebResourceError?
+            ) {
+                super.onReceivedError(view, request, error)
+                Toast.makeText(this@WebViewActivity, "Error loading page", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        val webSettings = webView.settings
+
+        // General settings
+        webSettings.javaScriptEnabled = true // Enable JavaScript
+        webSettings.domStorageEnabled = true // Enable DOM storage
+        webSettings.databaseEnabled = true // Enable HTML5 database storage
+        webSettings.cacheMode = WebSettings.LOAD_DEFAULT // Use default caching
+        webSettings.loadsImagesAutomatically = true // Ensure images load automatically
+        webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW // Allow mixed content (HTTP/HTTPS)
+
+        // Enable file access
+        webSettings.allowFileAccess = true
+        webSettings.allowContentAccess = true
+
+        // Additional settings to enhance compatibility
+        webSettings.useWideViewPort = true // Use viewport meta tag for scaling
+        webSettings.loadWithOverviewMode = true // Adjust the WebView to fit the screen
+        webSettings.setSupportZoom(true) // Enable zoom controls
+        webSettings.builtInZoomControls = true // Enable built-in zoom controls
+        webSettings.displayZoomControls = false // Hide the zoom controls on the screen
+
+        // Enable cookies
+        val cookieManager = CookieManager.getInstance()
+        cookieManager.setAcceptCookie(true)
+        cookieManager.setAcceptThirdPartyCookies(webView, true)
+
+        // Enable debugging for WebView
+        WebView.setWebContentsDebuggingEnabled(true)
 
         // Load the desired URL
         webView.loadUrl("https://saomiguelbus.com?device=android-app")
-
-        // Set up the button click listener for Back to App
-        btnBackToApp.setOnClickListener {
-            navigateToMainActivity()
-        }
-
-        // Set up the button click listener for Close
-        btnClose.setOnClickListener {
-            closeLinearLayout()
-        }
     }
 
     private fun closeLinearLayout() {
@@ -70,6 +109,6 @@ class WebViewActivity : AppCompatActivity() {
             webView.goBack()
         } else {
             super.onBackPressed()
-        } 
+        }
     }
 }

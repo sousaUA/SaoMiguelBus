@@ -145,7 +145,7 @@ class Functions {
     }
 
     private fun adClickIncrement(view: View, id: String){
-        var URL = "https://saomiguelbus-api.herokuapp.com/api/v1/ad/click?id=$id"
+        var URL = "https://api.saomiguelbus.com/api/v1/ad/click?id=$id"
         val requestQueue: RequestQueue = Volley.newRequestQueue(view.context)
         var request = StringRequest(Request.Method.POST, URL, { response -> (Log.d("DEBUG", "Response: $response")) }, { error -> (Log.d("DEBUG", "Error Response: $error")) })
         requestQueue.add(request)

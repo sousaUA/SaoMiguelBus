@@ -170,7 +170,7 @@ class SearchFragment(private var origin: String? = null, private var destination
         if(cards.size > 1){
             /** Send Stats to API **/
             var language : String = Datasource().getCurrentLang()
-            var URL= "https://saomiguelbus-api.herokuapp.com/api/v1/stat?request=get_route&origin=$origin&destination=$destination&time=NA&language=$language&platform=android&day=NA"
+            var URL= "https://api.saomiguelbus.com/api/v1/stat?request=get_route&origin=$origin&destination=$destination&time=NA&language=$language&platform=android&day=NA"
             val requestQueue: RequestQueue = Volley.newRequestQueue(view?.context)
             var request: StringRequest = StringRequest(Request.Method.POST, URL, { response -> (Log.d("DEBUG", "Response: $response")) }, { error -> (Log.d("DEBUG", "Error Response: $error")) })
             requestQueue.add(request)

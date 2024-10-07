@@ -19,7 +19,7 @@
             android:name=".WebViewActivity"
             android:theme="@style/Theme.SMiguelBus.NoActionBar"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="stateVisible|adjustResize">
         </activity>
 
         <activity

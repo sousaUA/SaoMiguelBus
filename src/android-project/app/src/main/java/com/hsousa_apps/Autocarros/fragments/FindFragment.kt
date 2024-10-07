@@ -58,7 +58,7 @@ class FindFragment(private var times: ArrayList<Route>? = null, private var uniq
                 createCards(this.view, TypeOfDay)
                 /** Send Stats to API **/
                 var language : String = Datasource().getCurrentLang()
-                var URL= "https://saomiguelbus-api.herokuapp.com/api/v1/stat?request=find_routes&origin=${stop.editableText.toString()}&destination=NA&time=NA&language=$language&platform=android&day=$TypeOfDay"
+                var URL= "https://api.saomiguelbus.com/api/v1/stat?request=find_routes&origin=${stop.editableText.toString()}&destination=NA&time=NA&language=$language&platform=android&day=$TypeOfDay"
                 val requestQueue: RequestQueue = Volley.newRequestQueue(view.context)
                 var request: StringRequest = StringRequest(Request.Method.POST, URL, { response -> (Log.d("DEBUG", "Response: $response")) }, { error -> (Log.d("DEBUG", "Error Response: $error")) })
                 requestQueue.add(request)

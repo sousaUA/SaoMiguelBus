@@ -41,7 +41,7 @@
     <string name="warning_dialog_message">Esta aplicación no fue desarrollada ni cuenta con el apoyo de ninguna empresa de autobuses. El presente cronograma fue tomado de documentos públicos puestos a disposición por ellos. ¡Algunas rutas/horas pueden estar desactualizadas!</string>
     <string name="warning_dialog_title">ADVERTENCIA</string>
     <string name="failed_response_title">Error al conectar con el servidor</string>
-    <string name="failed_response_desc">No se puede establecer la conexión con el servidor para actualizar los datos de la aplicación. La información presentada puede estar desactualizada.</string>
+    <string name="failed_response_desc">No fue posible establecer conexión con el servidor para actualizar los datos de la aplicación. La información presentada puede estar desactualizada. Hasta que no se pueda cargar la versión en línea, la aplicación mostrará su formato antiguo.</string>
     <string name="loading">Cargando</string>
     <string name="catch_bus">Autobús a</string>
     <string name="walk_to">Caminar hasta</string>

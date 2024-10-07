@@ -263,7 +263,7 @@ class MapFragment(private var redirected_origin: String? = null, private var red
                     val day_for_api = Datasource().getDayOfWeek(cal.get(Calendar.DAY_OF_WEEK))
                     val time_for_api = String.format("%02dh%02d",cal.get(Calendar.HOUR_OF_DAY),cal.get(Calendar.MINUTE))
                     //Use cal variable to get time and day
-                    var URL= "https://saomiguelbus-api.herokuapp.com/api/v1/stat?request=get_directions&origin=$origin_for_api&destination=$destination_for_api&time=$time_for_api&language=$language&platform=android&day=$day_for_api"
+                    var URL= "https://api.saomiguelbus.com/api/v1/stat?request=get_directions&origin=$origin_for_api&destination=$destination_for_api&time=$time_for_api&language=$language&platform=android&day=$day_for_api"
                     var request: StringRequest = StringRequest(Request.Method.POST, URL, { response -> (Log.d("DEBUG", "Response: $response")) }, { error -> (Log.d("DEBUG", "Error Response: $error")) })
                     requestQueue.add(request)
                     /***********************/
@@ -328,7 +328,7 @@ class MapFragment(private var redirected_origin: String? = null, private var red
                 val day_for_api = Datasource().getDayOfWeek(cal.get(Calendar.DAY_OF_WEEK))
                 val time_for_api = String.format("%02dh%02d",cal.get(Calendar.HOUR_OF_DAY),cal.get(Calendar.MINUTE))
                 //Use cal variable to get time and day
-                var URL= "https://saomiguelbus-api.herokuapp.com/api/v1/stat?request=get_directions&origin=$origin_for_api&destination=$destination_for_api&time=$time_for_api&language=$language&platform=android&day=$day_for_api"
+                var URL= "https://api.saomiguelbus.com/api/v1/stat?request=get_directions&origin=$origin_for_api&destination=$destination_for_api&time=$time_for_api&language=$language&platform=android&day=$day_for_api"
                 var request: StringRequest = StringRequest(Request.Method.POST, URL, { response -> (Log.d("DEBUG", "Response: $response")) }, { error -> (Log.d("DEBUG", "Error Response: $error")) })
                 requestQueue.add(request)
                 /***********************/

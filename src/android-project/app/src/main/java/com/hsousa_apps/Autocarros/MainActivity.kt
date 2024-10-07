@@ -50,8 +50,8 @@ class MainActivity : AppCompatActivity() {
         if (!Functions().isOnline(this) || intent.getBooleanExtra("fromWebView", false)) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             val URL = "https://api.saomiguelbus.com/api/v2/android/load"
-            loadData()
             super.onCreate(savedInstanceState)
+            loadData()
             try {
                 this.supportActionBar!!.hide()
             } catch (e: NullPointerException) {
@@ -197,7 +197,7 @@ class MainActivity : AppCompatActivity() {
 
             /** Send Stats to API **/
             var URL_load =
-                "https://saomiguelbus-api.herokuapp.com/api/v1/stat?request=android_load&origin=NA&destination=NA&time=NA&language=${Locale.getDefault().language}&platform=android&day=NA"
+                "https://api.saomiguelbus.com/api/v1/stat?request=android_load&origin=NA&destination=NA&time=NA&language=${Locale.getDefault().language}&platform=android&day=NA"
             var request: StringRequest = StringRequest(
                 Request.Method.POST,
                 URL_load,
