@@ -47,11 +47,12 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (!Functions().isOnline(this) || intent.getBooleanExtra("fromWebView", false)) {
+        super.onCreate(savedInstanceState)
+        val isOnline = Functions().isOnline(this)
+        if (!isOnline) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             val URL = "https://api.saomiguelbus.com/api/v2/android/load"
-            super.onCreate(savedInstanceState)
-            loadData()
+            //loadData()
             try {
                 this.supportActionBar!!.hide()
             } catch (e: NullPointerException) {
@@ -63,6 +64,25 @@ class MainActivity : AppCompatActivity() {
             /** Fetch routes from API **/
             val progressBar: ConstraintLayout = findViewById(R.id.loadingGroup)
             val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation)
+            if (!Datasource().getLoaded()) Datasource().load()
+            Datasource().loaded()
+            if (Locale.getDefault().language != "pt") {
+                Functions().translateStops(Locale.getDefault().language)
+            }
+
+            progressBar.visibility = View.GONE
+            bottomNavigation.visibility = View.VISIBLE
+
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle(getString(R.string.failed_response_title))
+            builder.setMessage(getString(R.string.failed_response_desc))
+
+            builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+            }
+
+            builder.show()
+
+            swapFrags(HomeFragment())
             val requestQueue: RequestQueue = Volley.newRequestQueue(this)
             val objectRequest: JsonArrayRequest = JsonArrayRequest(
                 Request.Method.GET,
@@ -70,6 +90,9 @@ class MainActivity : AppCompatActivity() {
                 null,
                 { response ->
                     try {
+                        if (!isOnline) {
+                            throw Exception("Network is unavailable. Loading Offline Data...")
+                        }
                         progressBar.visibility = View.VISIBLE
                         Datasource().loadStopsFromAPI()
                         var latest_version = "0"
@@ -145,7 +168,7 @@ class MainActivity : AppCompatActivity() {
                         progressBar.visibility = View.GONE
                         bottomNavigation.visibility = View.VISIBLE
                         swapFrags(HomeFragment())
-                    } catch (e: JSONException) {
+                    } catch (e: Exception) {
                         Log.d("ERROR", "JSONException: $e")
                         Datasource().load()
 
@@ -198,12 +221,12 @@ class MainActivity : AppCompatActivity() {
             /** Send Stats to API **/
             var URL_load =
                 "https://api.saomiguelbus.com/api/v1/stat?request=android_load&origin=NA&destination=NA&time=NA&language=${Locale.getDefault().language}&platform=android&day=NA"
-            var request: StringRequest = StringRequest(
-                Request.Method.POST,
-                URL_load,
-                { response -> (Log.d("DEBUG", "Response: $response")) },
-                { error -> (Log.d("DEBUG", "Error Response: $error")) })
-            requestQueue.add(request)
+//            var request: StringRequest = StringRequest(
+//                Request.Method.POST,
+//                URL_load,
+//                { response -> (Log.d("DEBUG", "Response: $response")) },
+//                { error -> (Log.d("DEBUG", "Error Response: $error")) })
+            //requestQueue.add(request)
             /***********************/
 
             val randomInt: Int = (0..10).random()

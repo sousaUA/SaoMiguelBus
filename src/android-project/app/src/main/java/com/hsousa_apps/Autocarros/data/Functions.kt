@@ -49,11 +49,14 @@ class Functions {
                 } else {
                     gAd_banner.visibility = View.INVISIBLE
                     var res_ids = listOf<Int>(R.drawable.offline_ad_1, R.drawable.offline_ad_2,
-                        R.drawable.offline_ad_3,  R.drawable.offline_ad_4)
-                    Glide.with(view.context)
-                        .load(res_ids.random())
-                        .transition(com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade(500))
-                        .into(customAd_banner)
+                    R.drawable.offline_ad_3,  R.drawable.offline_ad_4)
+                    if (mainActivity.isFinishing.not() && mainActivity.isDestroyed.not()) {
+                        Glide.with(view.context)
+                            .load(res_ids.random())
+                            .transition(com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade(500))
+                            .into(customAd_banner)
+                    }
+                    
                     customAd_banner.visibility = View.VISIBLE
                     customAd_banner.setOnClickListener {
                         var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://ad.saomiguelbus.com/"))
@@ -77,11 +80,13 @@ class Functions {
 
 
         if (media_url != ""){
-            Glide.with(view.context)
-                .load(media_url)
-                .transition(com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade(500))
-                .placeholder(R.drawable.ad_loading)
-                .into(customAd_banner)
+            if (mainActivity.isFinishing.not() && mainActivity.isDestroyed.not()) {
+                Glide.with(view.context)
+                    .load(media_url)
+                    .transition(com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade(500))
+                    .placeholder(R.drawable.ad_loading)
+                    .into(customAd_banner)
+            }
         }
 
         customAd_banner.setOnClickListener {

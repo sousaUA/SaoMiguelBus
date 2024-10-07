@@ -34,6 +34,7 @@ class WebViewActivity : AppCompatActivity() {
         btnBackToApp = findViewById(R.id.btnBackToApp)
         btnClose = findViewById(R.id.btnClose)
         linearLayout = findViewById(R.id.buttonLayout) // Assuming you have an ID for the LinearLayout
+        linearLayout.visibility = View.GONE
 
         setupWebView()
 
