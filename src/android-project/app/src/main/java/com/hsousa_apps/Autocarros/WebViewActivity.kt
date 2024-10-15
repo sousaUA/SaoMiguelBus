@@ -2,6 +2,7 @@ package com.hsousa_apps.Autocarros
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -47,12 +48,25 @@ class WebViewActivity : AppCompatActivity() {
     @SuppressLint("SetJavaScriptEnabled")
     private fun setupWebView() {
         webView.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                // Check if the URL is not null
+                if (url != null) {
+                    // Create an Intent to open the URL in a browser
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    startActivity(intent) // Start the activity to open the link in the browser
+                    return true // Indicate that we've handled the URL
+                }
+                return false // Let the WebView handle other URLs (if any)
+            }
+
             override fun onReceivedError(
                 view: WebView?,
                 request: WebResourceRequest?,
                 error: WebResourceError?
             ) {
                 super.onReceivedError(view, request, error)
+
+                // Show a generic error message if needed
                 Toast.makeText(this@WebViewActivity, "Error loading page", Toast.LENGTH_SHORT).show()
             }
         }
